@@ -33,10 +33,16 @@ class ImportProductsCommand extends Command
             $open = fopen($file, 'r');
 
             while (($data = fgetcsv($open, 1000, ',')) !== false) {
-                echo $data;
+                $result[] = $data;
             }
         } else {
             echo ("Unable to read file, wrong file format!");
+        }
+
+        sort($result);
+                
+        foreach ($result as $row_number => $data) {
+            echo $row_number . ': ' . $data[0] . ' '.$data[1] .' ' .$data[2] . ' ';
         }
 
         fclose($open);
