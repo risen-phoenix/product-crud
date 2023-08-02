@@ -30,21 +30,37 @@ class ImportProductsCommand extends Command
         $file = $this->argument('filename');
 
         if (preg_match("/\.(csv)$/", $file)) {
-            $open = fopen($file, 'r');
-
-            while (($data = fgetcsv($open, 1000, ',')) !== false) {
-                $result[] = $data;
+            $row      = 0;
+            $csvArray = array();
+            if (($open = fopen($file, 'r')) !== false) {
+                while (($data = fgetcsv($open, 0, ',')) !== false) {
+                    $num = count($data);
+                    for ($i = 0; $i < $num; $i++) {
+                        $csvArray[$row][] = $data[$i];
+                    }
+                    $row++;
+                }
             }
-        } else {
-            echo ("Unable to read file, wrong file format!");
-        }
 
-        sort($result);
-                
-        foreach ($result as $row_number => $data) {
-            echo $row_number . ': ' . $data[0] . ' '.$data[1] .' ' .$data[2] . ' ';
-        }
+            if (!empty($csvArray)) {
+                $csvArray = array_splice($csvArray, 1); //cut off the first row (names of the fields)
+            } else {
+                $csvArray = [];
+            }
 
-        fclose($open);
+            foreach($csvArray as $key => $value) {
+                $name[$key] = $value[1];
+                $price[$key] = $value[2];
+                $description[$key] = $value[3];
+            }
+
+            array_multisort($price,SORT_ASC ,$name,SORT_ASC, $description, SORT_ASC, $csvArray);
+
+            foreach($csvArray as $key => $value){
+                echo $key . ": " . $value[1]." ".$value[2]. " " . $value[3]. "\n";
+            }
+
+
+        }
     }
 }

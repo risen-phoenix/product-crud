@@ -15,19 +15,19 @@
 <body>
   <div>
   <h1 class="p-1">Products</h1>
-  <form action="/add-product" method="POST">
+  <form action="/" method="POST">
     @csrf
     <div class="mb-3 p-2">
       <label for="productName" class="form-label">Product Name</label>
-      <input type="text" class="form-control" id="productName" name="productName">
+      <input type="text" class="form-control" id="productName" name="productName" required minlength="3" maxlength="50" >
     </div>
     <div class="mb-3 p-2">
       <label for="productPrice" class="form-label">Price</label>
-      <input type="text" class="form-control" name="productPrice" id="productPrice">
+      <input type="text" class="form-control" name="productPrice" id="productPrice" required>
     </div>
     <div class="mb-3 p-2">
       <label for="productDescription" class="form-label">Description</label>
-      <textarea type="text" class="form-control" id="productDescription" name="productDescription"></textarea>
+      <textarea type="text" class="form-control" id="productDescription" name="productDescription" required minlength="10" maxlength="150"></textarea>
     </div>
     <button type="submit" class="btn btn-primary m-2">Submit</button>
   </form>
@@ -43,7 +43,7 @@
 @csrf
 @method('DELETE')
 <button>Delete</button>
-</form>    
+</form>
 @endforeach
   </div>
 </body>

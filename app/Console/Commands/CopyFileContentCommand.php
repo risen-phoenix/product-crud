@@ -33,7 +33,7 @@ class CopyFileContentCommand extends Command
 
         if (preg_match("/\.(txt)$/", $filename)) {
             copy($filename, $locationFilename);
-            echo ('The file contents have been copied');
+            echo ('File content copy completed');
         } else {
             echo ('Unable to copy, incorrect file format.');
         }
