@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
+    
    /**
     * Display list of products
+    *@Route('/')
     *
-    *
+    *@return view
     */
     public function index()
     {
@@ -21,13 +23,27 @@ class ProductController extends Controller
 
     }
 
-
+/**
+ * Show add product page
+ * @Route('product')
+ * @Method('get')
+ *
+ *
+ * @return view
+ */
     public function showAddProduct()
     {
         return view('addProduct');
     }
 
-
+    /**
+     * Add a product to the database
+     *
+     * @route('product')
+     * @Method('post')
+     *
+     * @return redirect
+     */
     public function addProduct(Request $request)
     {
         $validator = $request->validate(
@@ -50,7 +66,14 @@ class ProductController extends Controller
 
     }
 
-
+/**
+ * Display the edit page with product details
+ *
+ * @route('product/edit/{id}')
+ * @method('get')
+ *
+ * return view
+ */
 
     public function editProduct($productId)
     {
@@ -59,7 +82,15 @@ class ProductController extends Controller
         return view('editProduct', ['product' => $product]);
     }
 
-
+/**
+ * Update the data for a product
+ *
+ * @route('product/update/{id}')
+ * @Method('put')
+ *
+ * @params $request, $productId
+ * @return redirect to index
+ */
     function updateProduct(Request $request, int $productId)
     {
             $request->validate(
@@ -82,7 +113,15 @@ class ProductController extends Controller
 
 
         }
-
+/**
+ * Delete a product in accordance to it's product id
+ *
+ * @Route('product/delete/{id}')
+ * @method('delete')
+ *
+ * @params $productId
+ * return redirect to index
+ */
 
 
     function deleteProduct($productId)
