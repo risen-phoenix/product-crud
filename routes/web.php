@@ -20,6 +20,6 @@
       )->name('index');
       Route::get('product', [ProductController::class, 'showAddProduct'])->name('add-product');
       Route::post('product', [ProductController::class, 'addProduct'])->name('post-product');
-      Route::get('product/edit/{id}/', [ProductController::class, 'editProduct'])->name('edit');
+      Route::get('product/edit/{id}', [ProductController::class, 'editProduct'])->name('edit');
       Route::put('product/update/{id}', [ProductController::class, 'updateProduct'])->name('update');
       Route::delete('product/delete/{id}', [ProductController::class, 'deleteProduct'])->name('delete');
