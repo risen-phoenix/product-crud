@@ -1,10 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProductController;
-use App\Models\Product;
-use Illuminate\Support\Facades\Route;
+      use App\Http\Controllers\ProductController;
+      use App\Models\Product;
+      use Illuminate\Support\Facades\Route;
 
-/*
+      /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -14,13 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+// Route::resource('product', ProductController::class);
 
-// Route::post('/', function () {
-//     return view('home', ['products' => Product::all()]);
-// });
-
-
-// Route::post('/add-product', [ProductController::class,'addProduct']);
-// Route::get('/edit-product/{product}', [ProductController::class,'showEditProduct']);
-// Route::put('/edit-product/{product}', [ProductController::class,'updateProduct']);
-// Route::delete('/delete-product/{product}', [ProductController::class,'deleteProduct']);
+      Route::get('/',[ProductController::class, 'index']
+      )->name('index');
+      Route::get('product', [ProductController::class, 'showAddProduct'])->name('add-product');
+      Route::post('product', [ProductController::class, 'addProduct'])->name('post-product');
+      Route::get('product/edit/{id}/', [ProductController::class, 'editProduct'])->name('edit');
+      Route::put('product/update/{id}', [ProductController::class, 'updateProduct'])->name('update');
+      Route::delete('product/delete/{id}', [ProductController::class, 'deleteProduct'])->name('delete');
